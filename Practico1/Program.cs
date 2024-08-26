@@ -15,20 +15,34 @@ IDAL_Vehiculos dalVehiculos = new DAL_Vehiculos_EF();
 var config = new MapperConfiguration(cfg => cfg.AddProfile<MappingProfile>());
 var mapper = config.CreateMapper();
 
-string comando = "NUEVA";
+string comando = "1";
 
-Console.WriteLine("Bienvenido a mi primera app .NET!!!");
+Console.WriteLine("=================================================");
+Console.WriteLine("           BIENVENIDO A MI PRIMERA APP .NET       ");
+Console.WriteLine("=================================================\n");
+
 
 do
 {
-    Console.WriteLine("Ingrese comando (NUEVA/IMPRIMIR/BUSCAR/UPDATE/DELETE/EXIT): ");
-    Console.WriteLine("Ingrese comando Vehiculos \n" +
-        "              1 - NUEVA \n" +
-        "              2 - IMPRIMIR \n" +
-        "              3 - BUSCAR \n" +
-        "              4 - UPDATE \n" +
-        "              5 - DELETE \n" +
-        "              6 - EXIT \n");
+   
+    Console.WriteLine("Seleccione una opción del menú: \n");
+    Console.WriteLine("Personas:");
+    Console.WriteLine("1  - Nueva Persona");
+    Console.WriteLine("2  - Imprimir Personas");
+    Console.WriteLine("3  - Buscar Persona");
+    Console.WriteLine("4  - Actualizar Persona");
+    Console.WriteLine("5  - Eliminar Persona");
+    Console.WriteLine("-------------------------------------------------");
+    Console.WriteLine("Vehículos:");
+    Console.WriteLine("6  - Nuevo Vehículo");
+    Console.WriteLine("7  - Imprimir Vehículos");
+    Console.WriteLine("8  - Buscar Vehículo");
+    Console.WriteLine("9  - Actualizar Vehículo");
+    Console.WriteLine("10 - Eliminar Vehículo");
+    Console.WriteLine("-------------------------------------------------");
+    Console.WriteLine("0 - Salir");
+    Console.WriteLine("=================================================");
+    Console.Write("Ingrese su opción: ");
 
     try
     {
@@ -36,7 +50,9 @@ do
 
         switch (comando)
         {
-            case "NUEVA":
+            case "1":  //Nueva Persona
+                
+                Console.Clear();
 
                 Persona persona = new Persona();
                 Console.WriteLine("Ingrese el nombre de la persona: ");
@@ -52,14 +68,16 @@ do
                 Console.WriteLine("Ingrese la fecha de nacimiento de la persona: ");
                 persona.FechaNacimiento = Console.ReadLine();
 
-
-
                 dal.AddPersona(persona);
-                break;
-           
+                Console.WriteLine("Persona agregada exitosamente.");
+                
+
+                break;         
 
 
-            case "IMPRIMIR":
+            case "2": //Imprimir Personas
+
+                Console.Clear();
 
                 Console.WriteLine("Ingrese Nombre o Documento:");
                 string filtro = Console.ReadLine();
@@ -73,39 +91,8 @@ do
                     Console.WriteLine(p.GetString());
                 break;
 
-            case "UPDATE":
-
-                Console.WriteLine("Ingrese el ID de la persona a actualizar: ");
-                long id = Convert.ToInt64(Console.ReadLine());  
-
-                Persona actualizar = dal.GetPersona(id);
-
-                if (actualizar != null)
-                {
-                    Console.WriteLine($"Persona encontrada: {actualizar.GetString()}");
-
-                    Console.WriteLine("Ingrese nuevo nombre o presione enter para seguir");
-                    string nuevoNombre = Console.ReadLine();
-                    if (!string.IsNullOrEmpty(nuevoNombre))
-                    {
-                        actualizar.Nombre = nuevoNombre;
-                    }
-                    Console.WriteLine("Ingrese nuevo documento o enter para seguir");
-                    string nuevoDocumento = Console.ReadLine();
-                    if (!string.IsNullOrEmpty(nuevoDocumento))
-                    {
-                        actualizar.Documento = nuevoDocumento;
-                    }
-                    dal.UpdatePersona(actualizar);
-                    Console.WriteLine("actualizada exitosamente");
-                }
-                else
-                {
-                    Console.WriteLine("Persona no encontrada");
-                }
-                break; 
-                
-            case "BUSCAR":
+            case "3": //Buscar Persona
+                Console.Clear();
                 Console.WriteLine("Ingrese el ID de la persona a buscar: ");
                 long id3 = Convert.ToInt64(Console.ReadLine());
 
@@ -121,16 +108,91 @@ do
                 }
                 break;
 
-            case "DELETE":
+            case "4": //Actualizar Persona
+                Console.Clear();
+                Console.WriteLine("Ingrese el ID de la persona a actualizar: ");
+                long id = Convert.ToInt64(Console.ReadLine());  
+
+                Persona actualizar = dal.GetPersona(id);
+
+                if (actualizar != null)
+                {
+                    Console.WriteLine($"Persona encontrada: {actualizar.GetString()}");
+
+                    Console.WriteLine("Ingrese nuevo nombre o presione enter para seguir");
+                    string nuevoNombre = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(nuevoNombre))
+                    {
+                        actualizar.Nombre = nuevoNombre;
+                    }
+                    Console.WriteLine("Ingrese nuevo apellido o enter para seguir");
+                    string nuevoApellido = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(nuevoApellido))
+                    {
+                        actualizar.Apellido = nuevoApellido;
+                    }
+                    Console.WriteLine("Ingrese nuevo documento o enter para seguir");
+                    string nuevoDocumento = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(nuevoDocumento))
+                    {
+                        actualizar.Documento = nuevoDocumento;
+                    }
+                  
+                    Console.WriteLine("Ingrese nuevo teléfono o enter para seguir");
+                    string nuevoTelefono = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(nuevoTelefono))
+                    {
+                        actualizar.Telefono = nuevoTelefono;
+                    }
+                    Console.WriteLine("Ingrese nueva dirección o enter para seguir");
+                    string nuevaDireccion = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(nuevaDireccion))
+                    {
+                        actualizar.Direccion = nuevaDireccion;
+                    }
+                    Console.WriteLine("Ingrese nueva fecha de nacimiento o enter para seguir");
+                    string nuevaFechaNacimiento = Console.ReadLine();
+                    if (!string.IsNullOrEmpty(nuevaFechaNacimiento))
+                    {
+                        actualizar.FechaNacimiento = nuevaFechaNacimiento;
+                    }
+
+                    dal.UpdatePersona(actualizar);
+                    Console.WriteLine("actualizada exitosamente");
+                }
+                else
+                {
+                    Console.WriteLine("Persona no encontrada");
+                }
+                break; 
+                
+
+            case "5": //Eliminar Persona
+                Console.Clear();
+                List<Persona> personas = dal.GetPersonas();
+                foreach (Persona p in personas)
+                {
+                    Console.WriteLine(p.GetString());
+                }
 
                 Console.WriteLine("Ingrese Id para Deletear: ");
                 long id2 = Convert.ToInt64(Console.ReadLine()) ;
-
                 Persona aEliminar = dal.GetPersona(id2);
 
                 if(aEliminar != null)
                 {
-                    dal.DeletePersona(id2);
+                    //Controlo que no este referenciada
+                    List<Vehiculos> vehiculosAsociados = dalVehiculos.GetVehiculos().Where(v => v.PersonaId == id2).ToList();
+
+                    if (vehiculosAsociados.Count > 0)
+                    {
+                        Console.WriteLine("No se puede eliminar la persona. Tiene vehículos asociados.");
+                    }
+                    else
+                    {
+                        dal.DeletePersona(id2);
+                        Console.WriteLine("Persona eliminada exitosamente.");
+                    }
                 }
 
                 else
@@ -138,11 +200,9 @@ do
                     Console.WriteLine("Persona no encontrada");
                 }
                 break ;
+            case "6": //Nuevo Vehículo
 
-            case "EXIT":
-                break;
-
-            case "1":
+                Console.Clear();
                 try
                 {
                     Vehiculos vehiculo = new Vehiculos();
@@ -188,7 +248,9 @@ do
                 }
                 break;
 
-            case "2":
+            case "7": //Imprimir Vehículos
+
+                Console.Clear();
                 Console.WriteLine("\n");
 
                 List<Vehiculos> vehiculos = dalVehiculos.GetVehiculos();
@@ -196,13 +258,17 @@ do
 
                 foreach (Vehiculos v in vehiculos)
                 {
+
                     Persona p = dal.GetPersona(v.PersonaId);
-                    Console.WriteLine(v.Id.ToString().PadRight(5) + v.Marca.PadRight(15) + v.Modelo.PadRight(15) + v.Matricula.PadRight(15) + p.Nombre);
+                    string propietario = p != null ? p.Nombre : "No asignado";
+                    Console.WriteLine(v.Id.ToString().PadRight(5) + v.Marca.PadRight(15) + v.Modelo.PadRight(15) + v.Matricula.PadRight(15) + propietario);
                 }
                 Console.WriteLine("\n");
                 break;
 
-            case "3":
+            case "8": //Buscar Vehículo
+
+                Console.Clear();
                 Console.WriteLine("\n");
 
                 Console.WriteLine("Ingrese el ID del vehículo a buscar: ");
@@ -224,7 +290,9 @@ do
                 Console.WriteLine("\n");
                 break;
 
-            case "4":
+            case "9": //Actualizar Vehículo
+
+                Console.Clear();
                 Console.WriteLine("\n");
 
                 Console.WriteLine("Ingrese el ID del vehículo a actualizar: ");
@@ -276,7 +344,8 @@ do
                 Console.WriteLine("\n");
                 break;
 
-            case "5":
+            case "10": //Eliminar Vehículo
+                Console.Clear();
                 Console.WriteLine("\n");
 
                 Console.WriteLine("Ingrese el ID del vehículo a eliminar: ");
@@ -297,8 +366,10 @@ do
                 Console.WriteLine("\n");
                 break;
 
-           case "6":
+
+            case "0":
                 break;
+           
 
             default:
                 Console.WriteLine("Comando no reconocido.");
@@ -310,7 +381,7 @@ do
         Console.WriteLine(ex.Message);
     }
 }
-while (comando != "EXIT" );
+while (comando != "0" );
 
 Console.WriteLine("Hasta luego!!!");
 Console.ReadLine();

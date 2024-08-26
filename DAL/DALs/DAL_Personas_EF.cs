@@ -66,6 +66,7 @@ namespace DAL.DALs
                     persona.Id = item.Id;
                     persona.Nombre = item.Nombre;
                     persona.Documento = item.Documento;
+                    persona.Apellido = item.Apellido;
 
                     personas.Add(persona);
                 }
@@ -80,6 +81,11 @@ namespace DAL.DALs
                 Personas personas = context.Personas.Find((int)persona.Id);
                 personas.Nombre = persona.Nombre;
                 personas.Documento = persona.Documento;
+                personas.Apellido = persona.Apellido;
+                personas.Telefono = persona.Telefono;
+                personas.Direccion = persona.Direccion;
+                personas.FechaNacimiento = persona.FechaNacimiento;
+
 
                 context.SaveChanges();
             }

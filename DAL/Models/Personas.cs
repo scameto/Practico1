@@ -32,4 +32,4 @@ namespace DAL.Models
     // autoMapper de paguqete nuget
 
 } 
-}
+
