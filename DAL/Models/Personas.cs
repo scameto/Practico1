@@ -26,9 +26,10 @@ namespace DAL.Models
         public string Direccion { get; set; } = "";
         public string FechaNacimiento { get; set; } = "";
 
+     
+    }
 
+    // autoMapper de paguqete nuget
 
-        // autoMapper de paguqete nuget
-
-    } 
+} 
 }

@@ -20,7 +20,10 @@ namespace DAL.DALs
                 Personas personas = new Personas();
                 personas.Nombre = persona.Nombre;
                 personas.Documento = persona.Documento;
-
+                personas.Apellido = persona.Apellido;
+                personas.Telefono = persona.Telefono;
+                personas.Direccion = persona.Direccion;
+                personas.FechaNacimiento = persona.FechaNacimiento;
                 context.Personas.Add(personas);
                 context.SaveChanges();
 

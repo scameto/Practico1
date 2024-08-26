@@ -41,8 +41,19 @@ do
                 Persona persona = new Persona();
                 Console.WriteLine("Ingrese el nombre de la persona: ");
                 persona.Nombre = Console.ReadLine();
+                Console.WriteLine("Ingrese el apellido de la persona: ");
+                persona.Apellido = Console.ReadLine();
                 Console.WriteLine("Ingrese el documento de la persona: ");
                 persona.Documento = Console.ReadLine();
+                Console.WriteLine("Ingrese la dirección de la persona: ");
+                persona.Direccion = Console.ReadLine();                
+                Console.WriteLine("Ingrese el teléfono de la persona: ");
+                persona.Telefono = Console.ReadLine();
+                Console.WriteLine("Ingrese la fecha de nacimiento de la persona: ");
+                persona.FechaNacimiento = Console.ReadLine();
+
+
+
                 dal.AddPersona(persona);
                 break;
            
