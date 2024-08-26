@@ -1,0 +1,5 @@
+{
+  "ConnectionStrings": {
+    "DatabaseConnection": "Data Source=SC-LENOVO\\SQLEXPRESS;Initial Catalog=DOTNETPRACTICO1;Integrated Security=True;"
+  }
+}

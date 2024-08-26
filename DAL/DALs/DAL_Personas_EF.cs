@@ -1,0 +1,85 @@
+﻿using DAL.IDALs;
+using DAL.Models;
+using Shared;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace DAL.DALs
+{
+    public class DAL_Personas_EF : IDAL_Personas
+    {
+    
+        public void AddPersona(Persona persona)
+        {
+            using (var context = new DBContextCore())
+            {
+                Personas personas = new Personas();
+                personas.Nombre = persona.Nombre;
+                personas.Documento = persona.Documento;
+
+                context.Personas.Add(personas);
+                context.SaveChanges();
+
+                persona.Id = personas.Id;
+            }
+        }
+
+        public void DeletePersona(long id)
+        {
+            using (var context = new DBContextCore())
+            {
+                Personas personas = context.Personas.Find((int)id);
+                context.Personas.Remove(personas);
+                context.SaveChanges();
+            }
+        }
+
+        public Persona GetPersona(long id)
+        {
+            using (var context = new DBContextCore())
+            {
+                Personas personas = context.Personas.Find((int)id);
+                Persona persona = new Persona();
+                persona.Id = personas.Id;
+                persona.Nombre = personas.Nombre;
+                persona.Documento = personas.Documento;
+
+                return persona;
+            }
+        }
+
+        public List<Persona> GetPersonas()
+        {
+            using (var context = new DBContextCore())
+            {
+                List<Persona> personas = new List<Persona>();
+                foreach (var item in context.Personas)
+                {
+                    Persona persona = new Persona();
+                    persona.Id = item.Id;
+                    persona.Nombre = item.Nombre;
+                    persona.Documento = item.Documento;
+
+                    personas.Add(persona);
+                }
+                return personas;
+            }
+        }
+
+        public void UpdatePersona(Persona persona)
+        {
+            using (var context = new DBContextCore())
+            {
+                Personas personas = context.Personas.Find((int)persona.Id);
+                personas.Nombre = persona.Nombre;
+                personas.Documento = persona.Documento;
+
+                context.SaveChanges();
+            }
+        }
+    }
+}
