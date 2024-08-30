@@ -10,7 +10,7 @@ namespace DAL
 {
     public class DBContextCore : DbContext
     {
-        private string _connectionString = "Server=localhost,1400;Database=Practico1;User Id=sa;Password=Abc*123!;Encrypt=False;";
+        private string _connectionString = "Server=sqlserver,1433;Database=Practico1;User Id=sa;Password=Abc*123!;Encrypt=False;";
         //"Data Source=SC-LENOVO\\SQLEXPRES;Initial Catalog=DOTNETPRACTICO1;Integrated Security=True
 
         public DBContextCore() { }
@@ -31,5 +31,14 @@ namespace DAL
         public DbSet<Personas> Personas { get; set; }
 
         public DbSet<Vehiculos> Vehiculos { get; set; }
+
+        public static void UpdateDatabase()
+        {
+            using (var context = new DBContextCore())
+            {
+                context.Database.Migrate();
+            }
+
+        }
     }
 }

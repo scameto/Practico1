@@ -1,0 +1,44 @@
+using DAL;
+using DAL.DALs;
+using DAL.IDALs;
+
+try
+{
+    var builder = WebApplication.CreateBuilder(args);
+
+    // Add services to the container.
+
+    builder.Services.AddControllers();
+    // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+    builder.Services.AddEndpointsApiExplorer();
+    builder.Services.AddSwaggerGen();
+
+    #region Inyeccion de dependencias
+
+    //Dals
+    builder.Services.AddTransient<IDAL_Personas, DAL_Personas_EF>();
+
+    #endregion
+
+    var app = builder.Build();
+
+    // Configure the HTTP request pipeline.
+    if (app.Environment.IsDevelopment())
+    {
+        app.UseSwagger();
+        app.UseSwaggerUI();
+    }
+
+    app.UseHttpsRedirection();
+
+    app.UseAuthorization();
+
+    app.MapControllers();
+
+    DBContextCore.UpdateDatabase();
+
+    app.Run();
+}catch (Exception ex)
+{
+    Console.WriteLine(ex.Message);
+}
