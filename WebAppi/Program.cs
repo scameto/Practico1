@@ -1,6 +1,8 @@
 using DAL;
 using DAL.DALs;
 using DAL.IDALs;
+using BL.BLs;
+using BL.IBLs;
 
 try
 {
@@ -17,6 +19,9 @@ try
 
     //Dals
     builder.Services.AddTransient<IDAL_Personas, DAL_Personas_EF>();
+
+    //Bls
+    builder.Services.AddTransient<IBL_Personas, BL_Personas>();
 
     #endregion
 
