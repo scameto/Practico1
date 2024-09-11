@@ -17,12 +17,13 @@ namespace DAL.Mappings
                           .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                           .ForMember(dest => dest.Nombre, opt => opt.MapFrom(src => src.Nombre))
                           .ForMember(dest => dest.Documento, opt => opt.MapFrom(src => src.Documento))
-                          .ForMember(dest => dest.Apellido, opt => opt.Ignore()) // Si no necesitas mapear
-                          .ForMember(dest => dest.Telefono, opt => opt.Ignore()) // Si no necesitas mapear
-                          .ForMember(dest => dest.Direccion, opt => opt.Ignore()) // Si no necesitas mapear
-                          .ForMember(dest => dest.FechaNacimiento, opt => opt.Ignore()); // Si no necesitas mapear
-        
-        CreateMap<Personas, Persona>();
+                          .ForMember(dest => dest.Apellido, opt => opt.MapFrom(src => src.Apellido))
+                          .ForMember(dest => dest.Telefono, opt => opt.MapFrom(src => src.Telefono))
+                          .ForMember(dest => dest.Direccion, opt => opt.MapFrom(src => src.Direccion))
+                          .ForMember(dest => dest.FechaNacimiento, opt => opt.MapFrom(src => src.FechaNacimiento));
+
+
+            CreateMap<Personas, Persona>();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using DAL.IDALs;
 using DAL.Models;
+using Microsoft.IdentityModel.Tokens;
 using Shared;
 using System;
 using System.Collections.Generic;
@@ -50,6 +51,10 @@ namespace DAL.DALs
                 persona.Id = personas.Id;
                 persona.Nombre = personas.Nombre;
                 persona.Documento = personas.Documento;
+                persona.Apellido = personas.Apellido;
+                persona.FechaNacimiento = personas.FechaNacimiento;
+                persona.Telefono = personas.Telefono;
+                persona.Direccion = personas.Direccion;
 
                 return persona;
             }
@@ -67,6 +72,19 @@ namespace DAL.DALs
                     persona.Nombre = item.Nombre;
                     persona.Documento = item.Documento;
                     persona.Apellido = item.Apellido;
+                    persona.Telefono = item.Telefono;
+                    persona.Direccion = item.Direccion;
+                    if (item.FechaNacimiento != default)
+                    {
+                        persona.FechaNacimiento = item.FechaNacimiento;
+                    }
+                    else
+                    {
+                        // Manejar el caso donde la fecha es la predeterminada
+                        Console.WriteLine($"La fecha de nacimiento es inválida: {item.FechaNacimiento}");
+                    }
+
+
 
                     personas.Add(persona);
                 }
