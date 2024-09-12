@@ -15,27 +15,35 @@ namespace DAL.DALs
     { 
         public void AddVehiculo(Vehiculos vehiculo)
         {
-            if (vehiculo == null)
-            {
+            if (vehiculo == null)            
                 throw new ArgumentNullException(nameof(vehiculo), "El objeto Vehiculo no puede ser nulo.");
-            }
+            
+            if (string.IsNullOrWhiteSpace(vehiculo.Marca))            
+                throw new ArgumentException("La marca del vehículo no puede estar vacía.", nameof(vehiculo.Marca));            
+
+            if (string.IsNullOrWhiteSpace(vehiculo.Modelo))            
+                throw new ArgumentException("El modelo del vehículo no puede estar vacío.", nameof(vehiculo.Modelo));
+            
+            if (string.IsNullOrWhiteSpace(vehiculo.Matricula))            
+                throw new ArgumentException("La matricula del vehículo no puede estar vacío.", nameof(vehiculo.Modelo));
+            
             try
             {
                 using (var context = new DBContextCore())
-            {
-                Vehiculos vehiculos = new Vehiculos
                 {
-                    Marca = vehiculo.Marca?.Trim(),
-                    Modelo = vehiculo.Modelo?.Trim(),
-                    Matricula = vehiculo.Matricula?.Trim(),
-                    PersonaId = vehiculo.PersonaId 
-                };
+                    Vehiculos vehiculos = new Vehiculos
+                    {
+                        Marca = vehiculo.Marca?.Trim(),
+                        Modelo = vehiculo.Modelo?.Trim(),
+                        Matricula = vehiculo.Matricula?.Trim(),
+                        PersonaId = vehiculo.PersonaId 
+                    };
 
-                context.Vehiculos.Add(vehiculos);
-                context.SaveChanges();
+                    context.Vehiculos.Add(vehiculos);
+                    context.SaveChanges();
 
-                vehiculo.Id = vehiculos.Id;
-            }
+                    vehiculo.Id = vehiculos.Id;
+                }
             }
             catch (Exception ex)
             {
@@ -85,6 +93,9 @@ namespace DAL.DALs
 
                     vehiculos.Add(vehiculo);
                 }
+                if (vehiculos.Count == 0)                
+                    Console.WriteLine("No se encontraron vehículos.");
+                
                 return vehiculos;
             }
 
