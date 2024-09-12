@@ -1,4 +1,5 @@
-﻿using BL.IBLs;
+﻿using BL.BLs;
+using BL.IBLs;
 using DAL.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -44,9 +45,11 @@ namespace WebAppi.Controllers {
         public void Delete(int id) {
             _vehiculos.RemoveVehiculo(id);
         }
-
-      
-
-
+        // GET: api/Vehiculos/propietario/5
+        [HttpGet("propietario/{propietarioId}")]
+        public ActionResult<IEnumerable<Vehiculos>> GetVehiculosPorPropietario(long propietarioId) {
+            var vehiculos = _vehiculos.GetVehiculosPorPropietario(propietarioId);
+            return Ok(vehiculos);
+        }
     }
 }
