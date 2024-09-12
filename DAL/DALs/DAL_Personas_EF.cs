@@ -13,7 +13,10 @@ namespace DAL.DALs
 {
     public class DAL_Personas_EF : IDAL_Personas
     {
-    
+        internal static Personas? FromEntity(Persona p) {
+            throw new NotImplementedException();
+        }
+
         public void AddPersona(Persona persona)
         {
             using (var context = new DBContextCore())
@@ -74,15 +77,9 @@ namespace DAL.DALs
                     persona.Apellido = item.Apellido;
                     persona.Telefono = item.Telefono;
                     persona.Direccion = item.Direccion;
-                    if (item.FechaNacimiento != default)
-                    {
-                        persona.FechaNacimiento = item.FechaNacimiento;
-                    }
-                    else
-                    {
-                        // Manejar el caso donde la fecha es la predeterminada
-                        Console.WriteLine($"La fecha de nacimiento es inválida: {item.FechaNacimiento}");
-                    }
+                   
+                   persona.FechaNacimiento = item.FechaNacimiento;
+                 
 
 
 

@@ -18,5 +18,7 @@ namespace DAL.IDALs
         void RemoveVehiculo(long id);
 
         void UpdateVehiculo(Vehiculos vehiculo);
+
+        List<Vehiculos> GetVehiculosPorPropietario(long id);
     }
 }

@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using BL.IBLs;
+using DAL.Models;
+using Microsoft.AspNetCore.Mvc;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -6,31 +8,45 @@ namespace WebAppi.Controllers {
     [Route("api/[controller]")]
     [ApiController]
     public class VehiculosController : ControllerBase {
+
+        private readonly IBL_Vehiculos _vehiculos;
+        public VehiculosController(IBL_Vehiculos vehiculos) {
+            _vehiculos = vehiculos;
+        }
+
         // GET: api/<VehiculosController>
         [HttpGet]
-        public IEnumerable<string> Get() {
-            return new string[] { "value1", "value2" };
+        public IEnumerable<Vehiculos> Get() {
+            return _vehiculos.GetVehiculos();
         }
 
         // GET api/<VehiculosController>/5
         [HttpGet("{id}")]
-        public string Get(int id) {
-            return "value";
+        public Vehiculos Get(int id) {
+            return _vehiculos.GetVehiculo(id);
         }
 
         // POST api/<VehiculosController>
         [HttpPost]
-        public void Post([FromBody] string value) {
+        public void Post([FromBody] Vehiculos value) {
+            _vehiculos.AddVehiculo(value);
+
         }
 
         // PUT api/<VehiculosController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value) {
+        public void Put( [FromBody] Vehiculos value) {
+            _vehiculos.UpdateVehiculo(value);
         }
 
         // DELETE api/<VehiculosController>/5
         [HttpDelete("{id}")]
         public void Delete(int id) {
+            _vehiculos.RemoveVehiculo(id);
         }
+
+      
+
+
     }
 }

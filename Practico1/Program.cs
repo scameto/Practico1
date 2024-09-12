@@ -65,8 +65,17 @@ do
                 persona.Direccion = Console.ReadLine();                
                 Console.WriteLine("Ingrese el teléfono de la persona: ");
                 persona.Telefono = Console.ReadLine();
-                Console.WriteLine("Ingrese la fecha de nacimiento de la persona: ");
-                persona.FechaNacimiento = Console.ReadLine();
+                Console.WriteLine("Ingrese la fecha de nacimiento de la persona (formato: yyyy-MM-dd): ");
+                string fechaNacimientoInput = Console.ReadLine();
+                if (DateOnly.TryParse(fechaNacimientoInput, out DateOnly fechaNacimiento))
+                {
+                    persona.FechaNacimiento = fechaNacimiento;
+                }
+                else
+                {
+                    Console.WriteLine("Fecha de nacimiento no válida.");
+                }
+                          
 
                 dal.AddPersona(persona);
                 Console.WriteLine("Persona agregada exitosamente.");
@@ -154,7 +163,14 @@ do
                     string nuevaFechaNacimiento = Console.ReadLine();
                     if (!string.IsNullOrEmpty(nuevaFechaNacimiento))
                     {
-                        actualizar.FechaNacimiento = nuevaFechaNacimiento;
+                        if (DateOnly.TryParse(nuevaFechaNacimiento, out DateOnly fechaNacimientoActualizada))
+                        {
+                            actualizar.FechaNacimiento = fechaNacimientoActualizada;
+                        }
+                        else
+                        {
+                            Console.WriteLine("Fecha de nacimiento no válida.");
+                        }
                     }
 
                     dal.UpdatePersona(actualizar);

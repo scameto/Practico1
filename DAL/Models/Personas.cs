@@ -24,12 +24,9 @@ namespace DAL.Models
         public string Apellido { get; set; } = "";
         public string Telefono { get; set; } = "";
         public string Direccion { get; set; } = "";
-        public string FechaNacimiento { get; set; } = "";
-
+        public DateOnly FechaNacimiento { get; set; } = new DateOnly();
      
     }
-
-    // autoMapper de paguqete nuget
-
+   
 } 
 

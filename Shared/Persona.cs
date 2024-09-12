@@ -24,8 +24,7 @@
         public string Direccion { get; set; }
         public string Apellido { get; set; }
         public string Telefono { get; set; }
-        public string FechaNacimiento { get; set; }
-
+        public DateOnly FechaNacimiento { get; set; } 
         public string GetString()
         {
             return $"Id: {Id}, Documento: {documento}, Nombre: {Nombre}, Apellido: {Apellido}";

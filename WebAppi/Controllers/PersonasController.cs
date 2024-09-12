@@ -24,8 +24,8 @@ namespace WebAppi.Controllers {
 
         // GET api/<PersonasController>/5
         [HttpGet("{id}")]
-        public string Get(int id) {
-            return "value";
+        public Persona Get(long id) {
+            return _blPersonas.GetPersona(id);
         }
 
         // POST api/<PersonasController>
@@ -36,12 +36,14 @@ namespace WebAppi.Controllers {
 
         // PUT api/<PersonasController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value) {
+        public void Put(Persona persona) {
+            _blPersonas.UpdatePersona(persona);
         }
 
         // DELETE api/<PersonasController>/5
         [HttpDelete("{id}")]
         public void Delete(int id) {
+            _blPersonas.DeletePersona(id);
         }
     }
 }
